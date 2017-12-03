@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="guc.edu.eg.newsy.MainActivity">
+
+    <RelativeLayout
+        android:layout_width="368dp"
+        android:layout_height="495dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:id="@+id/buttons"
+            android:layout_width="368dp"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            >
+
+            <Button
+                android:id="@+id/top_stories"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Top stories"
+                android:onClick="quickReply"/>
+
+            <Button
+                android:id="@+id/most_viewed"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/top_stories"
+                android:text="Most Viewed"
+                android:onClick="quickReply"/>
+
+            <Button
+                android:id="@+id/latest"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/most_viewed"
+                android:text="Latest News"
+                android:onClick="quickReply"/>
+        </RelativeLayout>
+        <com.stfalcon.chatkit.messages.MessageInput
+            android:id="@+id/input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignWithParentIfMissing="true"
+            android:layout_above="@+id/buttons"
+
+            app:inputHint="Message.."/>
+        <com.stfalcon.chatkit.messages.MessagesList
+            android:id="@+id/messagesList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/input"
+            app:textAutoLink=""/>
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>
