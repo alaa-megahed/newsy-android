@@ -43,17 +43,13 @@ public class MainActivity extends AppCompatActivity  implements MessagesListAdap
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-        getWelcome();
-    }
-    @Override
-    protected void onStart() {
-        super.onStart();
         if(firstTime) {
             System.out.println("FIRST TIME");
             firstTime = false;
             getWelcome();
         }
     }
+
     void getWelcome () {
         String url = "https://dry-sea-26759.herokuapp.com/welcome";
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
@@ -64,7 +60,7 @@ public class MainActivity extends AppCompatActivity  implements MessagesListAdap
                         try {
                             uuid = response.get("uuid").toString();
                             initAdapter();
-                            RelativeLayout buttons = (RelativeLayout) findViewById(R.id.buttons);
+                            RelativeLayout buttons =  findViewById(R.id.buttons);
                             buttons.setVisibility(View.VISIBLE);
                             System.out.println("UUID:" + uuid);
                         } catch (JSONException e) {
@@ -100,7 +96,7 @@ public class MainActivity extends AppCompatActivity  implements MessagesListAdap
                             } else if (parser.getType().equals("json")) {
                                 JSONArray jsonArray = parser.getJsonArray();
                                 for (int i = 0; i < Math.min(jsonArray.length(), 10); i++) {
-                                    JSONObject obj = (JSONObject) jsonArray.getJSONObject(i);
+                                    JSONObject obj = jsonArray.getJSONObject(i);
                                     String title = obj.get("title").toString();
                                     Message message = new Message(new Random(10000).toString(), newsy, Html.fromHtml("<u>"+title+"</u>").toString());
                                     message.setUrl(obj.get("url").toString());
@@ -122,7 +118,7 @@ public class MainActivity extends AppCompatActivity  implements MessagesListAdap
                                     }
                                 }
 
-                                RelativeLayout buttons = (RelativeLayout) findViewById(R.id.buttons);
+                                RelativeLayout buttons = findViewById(R.id.buttons);
                                 buttons.setVisibility(View.VISIBLE);
                             }
                         } catch (JSONException e) {
@@ -193,6 +189,7 @@ public class MainActivity extends AppCompatActivity  implements MessagesListAdap
     public void quickReply(View view) throws JSONException {
         Button button = (Button) view;
         String msg = "";
+        boolean reset = false;
         if(button.getId() == R.id.top_stories) {
             postMessage("top stories");
             msg = "top stories";
@@ -202,10 +199,17 @@ public class MainActivity extends AppCompatActivity  implements MessagesListAdap
         } else if(button.getId() == R.id.latest){
             postMessage("latest");
             msg = "latest news";
+        } else if(button.getId() == R.id.reset){
+            postMessage("reset");
+            msg = "reset";
+            reset = true;
         }
         Message message = new Message(new Random(10000).toString(), (new User(uuid, "user", null, true)), msg);
         adapter.addToStart(message, true);
         RelativeLayout buttons = findViewById(R.id.buttons);
-        buttons.setVisibility(View.GONE);
+        if(reset)
+            buttons.setVisibility(View.VISIBLE);
+        else
+            buttons.setVisibility(View.GONE);
     }
 }

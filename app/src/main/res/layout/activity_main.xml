@@ -18,6 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
         <RelativeLayout
             android:id="@+id/buttons"
             android:layout_width="368dp"
@@ -33,7 +34,8 @@
                 android:id="@+id/top_stories"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Top stories"
+                android:text="Top Stories"
+                android:backgroundTint="@color/cornflower_blue_light_40"
                 android:onClick="quickReply"/>
 
             <Button
@@ -42,6 +44,7 @@
                 android:layout_height="match_parent"
                 android:layout_toRightOf="@id/top_stories"
                 android:text="Most Viewed"
+                android:backgroundTint="@color/cornflower_blue_light_40"
                 android:onClick="quickReply"/>
 
             <Button
@@ -50,16 +53,38 @@
                 android:layout_height="match_parent"
                 android:layout_toRightOf="@id/most_viewed"
                 android:text="Latest News"
+                android:backgroundTint="@color/cornflower_blue_light_40"
                 android:onClick="quickReply"/>
+
+
         </RelativeLayout>
+        <Button
+            android:id="@+id/reset"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:text="Reset"
+            android:drawableTop="@drawable/reset_icon"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignWithParentIfMissing="true"
+            android:layout_marginBottom="10dp"
+            android:bottomRightRadius="40dp"
+            android:bottomLeftRadius="40dp"
+            android:topRightRadius="40dp"
+            android:topLeftRadius="40dp"
+            android:backgroundTint="@color/cornflower_blue_two"
+            android:onClick="quickReply"/>
+
         <com.stfalcon.chatkit.messages.MessageInput
             android:id="@+id/input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignWithParentIfMissing="true"
-
+            android:layout_toLeftOf="@id/reset"
             android:layout_alignParentBottom="true"
             app:inputHint="Message.."/>
+
+
         <com.stfalcon.chatkit.messages.MessagesList
             android:id="@+id/messagesList"
             android:layout_width="match_parent"
